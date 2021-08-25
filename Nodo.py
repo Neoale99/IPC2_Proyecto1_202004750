@@ -1,5 +1,5 @@
-class Nodo():
-    
+class nodo():
+
     def __init__(self,nombre,x,y,comb) :
         self.nombre = nombre
         self.x = x

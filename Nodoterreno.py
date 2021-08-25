@@ -1,5 +1,5 @@
 
-class terreno1:
+class terreno():
     def __init__(self,nombre,dimx,dimy,inix,iniy,finx,finy) :
         self.nombre = nombre
         self.dimx = dimx
@@ -8,4 +8,6 @@ class terreno1:
         self.iniy = iniy
         self.finx = finx 
         self.finy = finy
+        self.siguiente = None
+        
         
