@@ -3,6 +3,8 @@ import xml.etree.ElementTree as et
 import time
 import Nodo 
 import Nodoterreno
+import Simple
+import Doble
 #Variabl-es
 N = '\033[30m'
 R = '\033[31m'
@@ -97,11 +99,12 @@ def test():
     print('\nTodos los Atributos')
     for elemento in root: 
         Nodoterreno.nombre = elemento.get('nombre')
+        #print(Nodoterreno.nombre)
         for subelemento in elemento: 
             
             for lptm in subelemento.iter('posicion'):
                 print()
-                #print('x: '+lptm.attrib['x']+' y: '+ lptm.attrib['y']+' valor:'+ lptm.text)
+                print('x: '+lptm.attrib['x']+' y: '+ lptm.attrib['y']+' valor:'+ lptm.text)
             
             for lptm2 in subelemento.iter('dimension'):
                 for dim in lptm2.iter('m'):
@@ -120,10 +123,7 @@ def test():
                     print(dim.text)
                 for dim in lptm2.iter('y'):
                     print(dim.text)
-"""    for elemento in root:
-        print(elemento) #tag
-        for subelemento in elemento:
-            print('> ' + subelemento.text) #valores -> text"""
+
 
 
 def archivosalida():

@@ -7,4 +7,5 @@ class nodo():
         self.comb = comb
         self.siguiente = None
         self.anterior = None
+        self.etiquieta = []
         
