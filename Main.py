@@ -5,6 +5,7 @@ import Nodo
 import Nodoterreno
 import Simple
 import Doble
+from os import system,startfile
 #Variabl-es
 N = '\033[30m'
 R = '\033[31m'
@@ -15,7 +16,8 @@ Mo = '\033[35m'
 C = '\033[36m'
 Bl = '\033[37m'
 RESET = '\033[39m'
-Nomme = []
+listaterr = Simple()
+listdob = Doble()
 #Metodos
 def menu():
     try:
@@ -43,8 +45,7 @@ def menu():
         if (a == 4):
             datos()
         if (a == 5):
-           print("Ya se cargó el archivo")
-           menu()
+           gg()
         if (a == 6):
             print("Saliendo...")
     except: 
@@ -76,18 +77,9 @@ def datos():
     time.sleep(2)
     menu()
 
-def abrir():
-    a = input("Ingrese la ruta del archivo ")
-    tree = et.parse(a)
-    root = tree.getroot()
-    for hijo in root:
-        #Nodoterreno.nombre = terreno.attrib['Nombre']
-        #Nodoterreno.dimx = terreno.attrib['']
-        print(hijo)
-    print("Toy probando")
-    menu()
+
 def procesar():
-    print("Estoy en desarrollo")
+    print("Ingrese el nombre del terreno a trabajar: ")
     
 def test():
     a = input("Ingrese la ruta del archivo ")
@@ -98,31 +90,38 @@ def test():
 
     print('\nTodos los Atributos')
     for elemento in root: 
-        Nodoterreno.nombre = elemento.get('nombre')
+        nombre = elemento.get('nombre')
         #print(Nodoterreno.nombre)
         for subelemento in elemento: 
             
+
+            for lptm2 in subelemento.iter('dimension'):
+                for dim in lptm2.iter('m'):
+                    dimx = dim.text
+                
+                for dim in lptm2.iter('n'):
+                    dimy = dim.text
+            
+            for lptm2 in subelemento.iter('posicioninicio'):
+                for dim2 in lptm2.iter('x'):
+                    inix = dim2.text
+                for dim2 in dim2.iter('y'):
+                    iniy = dim2.text
+
+            for lptm2 in subelemento.iter('posicionfin'):
+                for dim3 in lptm2.iter('x'):
+                    finx = dim3.text
+                for dim3 in lptm2.iter('y'):
+                    finy = dim3.text
+
+            listaterr.Creart(nombre,dimx,dimy,inix,iniy,finx,finy)
             for lptm in subelemento.iter('posicion'):
                 print()
                 print('x: '+lptm.attrib['x']+' y: '+ lptm.attrib['y']+' valor:'+ lptm.text)
-            
-            for lptm2 in subelemento.iter('dimension'):
-                for dim in lptm2.iter('m'):
-                    print(dim.text)
-                for dim in lptm2.iter('n'):
-                    print(dim.text)
-            
-            for lptm2 in subelemento.iter('posicioninicio'):
-                for dim in lptm2.iter('x'):
-                    print(dim.text)
-                for dim in lptm2.iter('y'):
-                    print(dim.text)
-
-            for lptm2 in subelemento.iter('posicionfin'):
-                for dim in lptm2.iter('x'):
-                    print(dim.text)
-                for dim in lptm2.iter('y'):
-                    print(dim.text)
+                mapa = elemento.get('nombre')
+                mapa.lista_pos.agregar(lptm.attrib['x'],lptm.attrib['y'],lptm.text)
+    
+    menu()
 
 
 
@@ -135,6 +134,73 @@ def archivosalida():
     f.close
 
     menu()
+
+def gg():
+    graphviz='''
+    digraph L{
+    node[shape=box fillcolor="#FFEDBB" style =filled]
     
+    subgraph cluster_p{
+        label= "TERRENO "
+        bgcolor = "#398D9C"
+        edge[dir = "none"]
+
+
+    '''
+    graphi = """
+    }
+
+}
+"""
+    a = input("Ingrese la ruta del archivo ")   
+    print(a)
+    tree = et.parse(a)
+    root = tree.getroot()
+    
+    print('\nTodos los Atributos han sido cargados')
+    for elemento in root: 
+       
+       #print(Nodoterreno.nombre)
+       for subelemento in elemento: 
+           
+           for lptm in subelemento.iter('posicion'):
+               continue
+               #print('x: '+lptm.attrib['x']+' y: '+ lptm.attrib['y']+' valor:'+ lptm.text)
+           
+           for lptm2 in subelemento.iter('dimension'):
+               for dim in lptm2.iter('m'):
+                   x = int(dim.text)
+               for dim in lptm2.iter('n'):
+                   y = int(dim.text)
+
+
+
+    for i in range(x):
+        i = i+1
+        for o in range(y):
+            o = o+1
+            b = str(str(i)+"_"+str(o))
+            graphviz += "\nnodo"+b+"[label= "+"gas"+" ,fillcolor=green,group="+str(i)+"]"
+
+    for i in range(x-1):
+        i = i+1
+        for o in range(y):
+            o = o+1
+            b = str(str(i)+"_"+str(o))
+            c = str(str(i+1)+"_"+str(o))
+            graphviz += "\nnodo"+b+"->nodo"+c+""
+
+    for i in range(x):
+            i = i+1
+            for o in range(y-1):
+                o = o+1
+                b = str(str(i)+"_"+str(o))
+                c = str(str(i)+"_"+str(o+1))
+        
+                graphviz +=  "\n{rank=same;nodo"+b+"->nodo"+c+"}"
+
+    graphviz += "\n"+graphi
+    menu()
+
 #Codigo
 menu()
