@@ -1,7 +1,7 @@
 class nodo():
 
-    def __init__(self,nombre,x,y,comb) :
-        self.nombre = nombre
+    def __init__(self,x,y,comb) :
+
         self.x = x
         self.y = y 
         self.comb = comb

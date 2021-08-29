@@ -1,4 +1,4 @@
-import Nodoterreno
+from Nodoterreno import *
 
 class Simple():
     def __init__(self):
@@ -7,8 +7,8 @@ class Simple():
         
 
     def Creart(self,nombre,dimx,dimy,inix,iniy,finx,finy):
-        nuevo = Nodoterreno.terreno(nombre,dimx,dimy,inix,iniy,finx,finy)
-        self.size += 1 
+        nuevo = terreno(nombre,dimx,dimy,inix,iniy,finx,finy)
+        
         if self.primero is None:
             self.primero = nuevo
         else:
@@ -21,8 +21,9 @@ class Simple():
         aux = self.primero
         while aux is not None:
             print(aux.nombre)
+            aux = aux.siguiente
 
-    def getTerreno(self,nombre):
+    def getnom(self,nombre):
         tmp = self.primero
         while tmp is not None:
             if tmp.nombre == nombre:
