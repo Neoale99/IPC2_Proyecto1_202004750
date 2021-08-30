@@ -1,5 +1,4 @@
 #Librerias
-from typing import MutableMapping
 import xml.etree.ElementTree as et  
 import time
 from Nodo import *
@@ -90,7 +89,9 @@ def procesar():
     else:
         print()    
     a = input(RESET+"Ingrese el terreno a trabajar ")
-    print(listaterr.primero())
+        
+    print("No funciono :c")
+    menu()
 def test():
     a = input("Ingrese la ruta del archivo ")
     global url
@@ -138,12 +139,8 @@ def test():
 
 
 def archivosalida():
-    print("Omla")
-    a = input("Ingrese la ruta donde se escribirá el archivo")
-    b = a+"\salida.txt"
-    f = open(b,"w")
-    f.write("Esto es una prueba")
-    f.close
+    print("Estoy en mantenimiento, no seguir")
+
 
     menu()
 
@@ -233,11 +230,8 @@ def gg():
         menu()
 
 
-def pa():
-    print("")
 
-    menu()
 #Codigo
-print("Bienvenido a la agencia Guatemalteca de Investigación Espacial")
+print(V+"\nBienvenido a la agencia Guatemalteca de Investigación Espacial")
 print("Ingresando al menú")
 menu()
